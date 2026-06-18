@@ -191,7 +191,7 @@ No installation required.
 ## 📂 Project Structure
 
 ```text
-SalaryCalc
+CTC Decoder
 │
 ├── index.html
 ├── style.css
