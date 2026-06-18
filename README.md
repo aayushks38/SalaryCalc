@@ -14,7 +14,7 @@ A modern salary intelligence tool that helps students and freshers estimate thei
 
 <br>
 
-🚀 **Live Demo:** [Coming Soon]
+🚀 **Live Demo:** ctcdecoder.vercel.app
 
 📂 **Repository:** SalaryCalc
 
