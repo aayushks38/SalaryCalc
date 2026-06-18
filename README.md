@@ -225,7 +225,7 @@ Frontend Developer & Computer Science Student
 
 🔗 GitHub: https://github.com/aayushks38
 
-🔗 LinkedIn: Add Your LinkedIn URL
+🔗 LinkedIn: www.linkedin.com/in/aayush-kumar-sinha
 
 ---
 
