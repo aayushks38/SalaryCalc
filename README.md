@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💸 SalaryCalc
+# 💸 CTC Decoder
 
 ### Decode your real take-home salary, not just your CTC.
 
