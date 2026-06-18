@@ -199,7 +199,10 @@ SalaryCalc
 │
 ├── screenshots
 │   ├── desktop.png
-│   └── mobile.png
+│   ├── desktop-2.png
+│   ├── mobile.png
+│   ├── mobile-2.png
+│   └── mobile-3.png
 │
 └── README.md
 ```
