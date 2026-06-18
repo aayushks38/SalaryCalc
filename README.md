@@ -71,13 +71,19 @@ However, the actual amount credited to their bank account every month is often s
 
 ### Desktop Experience
 
-<img width="100%" src="screenshots/desktop.png">
+<img width="1558" height="977" alt="image" src="https://github.com/user-attachments/assets/1c6d8fe2-6129-46ba-b6b8-9dee2b3017a2" />
+<img width="1563" height="979" alt="image" src="https://github.com/user-attachments/assets/a59e40bc-f7f3-4154-aa63-3b373066d4bb" />
+
 
 ---
 
 ### Mobile Experience
 
-<img width="300" src="screenshots/mobile.png">
+<img width="402" height="877" alt="image" src="https://github.com/user-attachments/assets/c4950a0e-43bc-444f-ad97-43314247481b" />
+<img width="401" height="876" alt="image" src="https://github.com/user-attachments/assets/69c85e48-ffb6-40d0-9322-6f3fb0359187" />
+<img width="397" height="871" alt="image" src="https://github.com/user-attachments/assets/949a0572-8e2a-4556-9cf4-f22c6b0de81b" />
+
+
 
 ---
 
