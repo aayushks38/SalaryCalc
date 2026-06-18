@@ -1,0 +1,263 @@
+    <!DOCTYPE html>
+    <html lang="en" data-theme="dark">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Salary Calculator — Know your real monthly in-hand pay from any CTC offer." />
+    <meta name="author" content="Aayush Kumar Sinha" />
+    <title>SalaryCalc — Decode Your CTC</title>
+
+    <!-- Space Grotesk (fintech numbers/headings) + Plus Jakarta Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <canvas id="constellation"></canvas>
+
+    <!-- ── TOPBAR ── -->
+    <nav class="topbar">
+        <div class="brand">
+        <div class="brand-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M8 1L14 4.5V11.5L8 15L2 11.5V4.5L8 1Z" stroke="#00c896" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M8 5V11M5 6.5L8 5L11 6.5" stroke="#00c896" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <span class="brand-name">SalaryCalc</span>
+        </div>
+        <div class="topbar-right">
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+            <span id="themeIcon">☀️</span>
+        </button>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- ── HERO ── -->
+        <section class="hero">
+        <div class="hero-text">
+            <p class="eyebrow">Placement &amp; Fresher Tool</p>
+            <h1>Decode your <span class="accent">real</span> take-home salary</h1>
+            <p class="hero-sub">Most placement offers look impressive on paper. Find out what actually reaches your bank account every month.</p>
+        </div>
+        <div class="hero-stat-preview" aria-hidden="true">
+            <div class="preview-label">Placement Insight</div>
+            <div class="preview-num">Compare Offers</div>
+            <div class="preview-sub">
+                Focus on take-home salary, not just CTC.
+            </div>
+        </div>
+        </section>
+
+        <!-- ── MAIN GRID ── -->
+        <div class="main-grid">
+
+        <!-- LEFT: Input panel -->
+        <aside class="panel input-panel">
+
+            <div class="panel-eyebrow">Offer Details</div>
+
+            <form id="calcForm" novalidate autocomplete="off">
+
+            <!-- CTC -->
+            <div class="field" id="fCTC">
+                <label for="iCTC">Annual CTC</label>
+                <div class="field-inner">
+                <span class="pre">₹</span>
+                <input id="iCTC" type="number" placeholder="1,200,000" min="0" step="1" />
+                <span class="lpa-badge" id="tagCTC"></span>
+                </div>
+                <span class="err-msg" id="eCTC"></span>
+            </div>
+
+            <!-- Bonus -->
+            <div class="field" id="fBonus">
+                <label for="iBonus">Annual Bonus <em>(variable pay)</em></label>
+                <div class="field-inner">
+                <span class="pre">₹</span>
+                <input id="iBonus" type="number" placeholder="0" min="0" step="1" />
+                <span class="lpa-badge" id="tagBonus"></span>
+                </div>
+                <span class="err-msg" id="eBonus"></span>
+            </div>
+
+            <!-- PF + Tax -->
+            <div class="field-row">
+                <div class="field" id="fPF">
+                <label for="iPF">PF Deduction</label>
+                <div class="field-inner pct">
+                    <input id="iPF" type="number" placeholder="12" min="0" max="100" step="0.1" />
+                    <span class="suf">%</span>
+                </div>
+                <span class="err-msg" id="ePF"></span>
+                </div>
+                <div class="field" id="fTax">
+                <label for="iTax">Income Tax</label>
+                <div class="field-inner pct">
+                    <input id="iTax" type="number" placeholder="10" min="0" max="100" step="0.1" />
+                    <span class="suf">%</span>
+                </div>
+                <span class="err-msg" id="eTax"></span>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit" id="btnCalc" class="btn-primary">Calculate</button>
+                <button type="button" id="btnReset" class="btn-ghost">Reset</button>
+            </div>
+
+            </form>
+
+            <!-- Author -->
+            <div class="author">
+            <div class="author-av">AKS</div>
+            <div class="author-info">
+                <strong>Aayush Kumar Sinha</strong>
+                <span>aayushksinha24@gmail.com</span>
+            </div>
+            </div>
+
+        </aside>
+
+        <!-- RIGHT: Results panel -->
+        <section class="panel result-panel" aria-live="polite">
+
+            <!-- Empty state -->
+            <div class="empty" id="emptyState">
+            <div class="empty-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect x="1" y="1" width="38" height="38" rx="10" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <path d="M20 13V27M13 20H27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <p>See your monthly salary,
+                annual in-hand pay, 
+                and deduction breakdown.<br/>
+                click<strong>Calculate</strong> to begin.</p>
+            </div>
+
+            <!-- Results -->
+            <div class="results" id="resultsBlock">
+
+            <!-- Primary highlight card -->
+            <div class="primary-stat" id="primaryStat">
+                <div class="primary-label">Monthly In-Hand 🏠</div>
+                <div class="primary-value" id="svMonthly">—</div>
+                <div class="primary-sub" id="subMonthly"></div>
+            </div>
+
+            <!-- Secondary stats row -->
+            <div class="stats-row">
+                <div class="stat-item">
+                <span class="stat-lbl">Fixed Pay / yr</span>
+                <span class="stat-val" id="svFixed">—</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                <span class="stat-lbl">In-Hand / yr</span>
+                <span class="stat-val green" id="svAnnual">—</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                <span class="stat-lbl">Deductions / yr</span>
+                <span class="stat-val red" id="svDeduct">—</span>
+                </div>
+            </div>
+
+            <!-- Deduction health bar -->
+            <div class="health-wrap">
+                <div class="health-header">
+                <span class="health-label">Deduction Burden</span>
+                <span class="health-pct" id="healthPct">—</span>
+                </div>
+                <div class="health-track">
+                <div class="health-fill" id="healthFill" style="width:0%"></div>
+                </div>
+                <div class="health-note" id="healthNote"></div>
+            </div>
+
+            <!-- Breakdown -->
+            <div class="breakdown">
+                <div class="breakdown-title">CTC Breakdown</div>
+
+                <div class="brow">
+                <span class="brow-lbl">In-Hand</span>
+                <div class="brow-track">
+                    <div class="brow-fill fill-green" id="bInhand" style="width:0%"></div>
+                </div>
+                <span class="brow-pct" id="pInhand">—</span>
+                </div>
+                <div class="brow">
+                <span class="brow-lbl">PF</span>
+                <div class="brow-track">
+                    <div class="brow-fill fill-blue" id="bPF" style="width:0%"></div>
+                </div>
+                <span class="brow-pct" id="pPF">—</span>
+                </div>
+                <div class="brow">
+                <span class="brow-lbl">Tax</span>
+                <div class="brow-track">
+                    <div class="brow-fill fill-amber" id="bTax" style="width:0%"></div>
+                </div>
+                <span class="brow-pct" id="pTax">—</span>
+                </div>
+                <div class="brow">
+                <span class="brow-lbl">Bonus</span>
+                <div class="brow-track">
+                    <div class="brow-fill fill-violet" id="bBonus" style="width:0%"></div>
+                </div>
+                <span class="brow-pct" id="pBonus">—</span>
+                </div>
+
+            </div>
+
+            </div>
+        </section>
+
+        </div>
+
+        <!-- ── COMPARISON TABLE ── -->
+        <section class="table-section" id="tableSection">
+        <div class="section-head">
+            <div>
+            <h2>Package Comparison</h2>
+            <p>Your deduction rates applied across common CTC brackets</p>
+            </div>
+        </div>
+        <div class="tbl-wrap">
+            <table id="cmpTable">
+            <thead>
+                <tr>
+                <th>Annual CTC</th>
+                <th>Fixed Pay</th>
+                <th>Gross / Month</th>
+                <th>In-Hand / Month</th>
+                <th>You Keep</th>
+                </tr>
+            </thead>
+            <tbody id="cmpBody"></tbody>
+            </table>
+        </div>
+        </section>
+
+        <!-- ── CTA ── -->
+        <div class="cta-section">
+        <a href="https://digitalheroesco.com" id="heroBtn" class="hero-cta" target="_blank" rel="noopener noreferrer">
+            Built for Digital Heroes
+        </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Built by <strong>Aayush Kumar Sinha</strong> · <a href="mailto:aayushksinha24@gmail.com">aayushksinha24@gmail.com</a></p>
+        <p class="disc">Estimates are based on the deduction rates entered. &amp; Actual compensation structures may vary across companies.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    </body>
+    </html>
