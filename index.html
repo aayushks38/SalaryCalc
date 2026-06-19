@@ -7,7 +7,6 @@
     <meta name="author" content="Aayush Kumar Sinha" />
     <title>CTC Decoder — Decode Your CTC</title>
 
-    <!-- Space Grotesk (fintech numbers/headings) + Plus Jakarta Sans (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
@@ -17,7 +16,6 @@
     <body>
         <canvas id="constellation"></canvas>
 
-    <!-- ── TOPBAR ── -->
     <nav class="topbar">
         <div class="brand">
         <div class="brand-icon">
@@ -36,8 +34,6 @@
     </nav>
 
     <main>
-
-        <!-- ── HERO ── -->
         <section class="hero">
         <div class="hero-text">
             <p class="eyebrow">Placement &amp; Fresher Tool</p>
@@ -53,17 +49,14 @@
         </div>
         </section>
 
-        <!-- ── MAIN GRID ── -->
         <div class="main-grid">
 
-        <!-- LEFT: Input panel -->
         <aside class="panel input-panel">
 
             <div class="panel-eyebrow">Offer Details</div>
 
             <form id="calcForm" novalidate autocomplete="off">
 
-            <!-- CTC -->
             <div class="field" id="fCTC">
                 <label for="iCTC">Annual CTC</label>
                 <div class="field-inner">
@@ -74,7 +67,6 @@
                 <span class="err-msg" id="eCTC"></span>
             </div>
 
-            <!-- Bonus -->
             <div class="field" id="fBonus">
                 <label for="iBonus">Annual Bonus <em>(variable pay)</em></label>
                 <div class="field-inner">
@@ -85,7 +77,6 @@
                 <span class="err-msg" id="eBonus"></span>
             </div>
 
-            <!-- PF + Tax -->
             <div class="field-row">
                 <div class="field" id="fPF">
                 <label for="iPF">PF Deduction</label>
@@ -112,7 +103,6 @@
 
             </form>
 
-            <!-- Author -->
             <div class="author">
             <div class="author-av">AKS</div>
             <div class="author-info">
@@ -123,10 +113,8 @@
 
         </aside>
 
-        <!-- RIGHT: Results panel -->
         <section class="panel result-panel" aria-live="polite">
 
-            <!-- Empty state -->
             <div class="empty" id="emptyState">
             <div class="empty-icon">
                 <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -140,7 +128,6 @@
                 click<strong> Calculate</strong> to begin.</p>
             </div>
 
-            <!-- Results -->
             <div class="results" id="resultsBlock">
 
             <!-- Primary highlight card -->
@@ -168,7 +155,6 @@
                 </div>
             </div>
 
-            <!-- Deduction health bar -->
             <div class="health-wrap">
                 <div class="health-header">
                 <span class="health-label">Deduction Burden</span>
@@ -180,7 +166,6 @@
                 <div class="health-note" id="healthNote"></div>
             </div>
 
-            <!-- Breakdown -->
             <div class="breakdown">
                 <div class="breakdown-title">CTC Breakdown</div>
 
@@ -220,7 +205,6 @@
 
         </div>
 
-        <!-- ── COMPARISON TABLE ── -->
         <section class="table-section" id="tableSection">
         <div class="section-head">
             <div>
@@ -244,7 +228,6 @@
         </div>
         </section>
 
-        <!-- ── CTA ── -->
         <div class="cta-section">
         <a href="https://digitalheroesco.com" id="heroBtn" class="hero-cta" target="_blank" rel="noopener noreferrer">
             Built for Digital Heroes

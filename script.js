@@ -1,11 +1,5 @@
-/* ============================================================
-   SalaryCalc — script.js (Fintech Edition)
-   Author: Aayush Kumar Sinha
-   ============================================================ */
-
 'use strict';
 
-/* ── Theme Toggle ──────────────────────────────── */
 const html      = document.documentElement;
 const themeBtn  = document.getElementById('themeBtn');
 const themeIcon = document.getElementById('themeIcon');
@@ -21,38 +15,32 @@ themeBtn.addEventListener('click', () => {
   localStorage.setItem('sc-theme-fin', next);
 });
 
-/* ── DOM Elements ──────────────────────────────── */
 const form       = document.getElementById('calcForm');
 const btnCalc    = document.getElementById('btnCalc');
 const btnReset   = document.getElementById('btnReset');
 
-// Inputs
+
 const iCTC       = document.getElementById('iCTC');
 const iBonus     = document.getElementById('iBonus');
 const iPF        = document.getElementById('iPF');
 const iTax       = document.getElementById('iTax');
 
-// Labels
 const tagCTC     = document.getElementById('tagCTC');
 const tagBonus   = document.getElementById('tagBonus');
 
-// Sections
 const emptyState = document.getElementById('emptyState');
 const resultsBlock = document.getElementById('resultsBlock');
 
-// Primary / Secondary Stats
 const svMonthly  = document.getElementById('svMonthly');
 const subMonthly = document.getElementById('subMonthly');
 const svFixed    = document.getElementById('svFixed');
 const svAnnual   = document.getElementById('svAnnual');
 const svDeduct   = document.getElementById('svDeduct');
 
-// Health Bar
 const healthPct  = document.getElementById('healthPct');
 const healthFill = document.getElementById('healthFill');
 const healthNote = document.getElementById('healthNote');
 
-// Breakdown
 const bInhand    = document.getElementById('bInhand');
 const bPF        = document.getElementById('bPF');
 const bTax       = document.getElementById('bTax');
@@ -62,10 +50,8 @@ const pPF        = document.getElementById('pPF');
 const pTax       = document.getElementById('pTax');
 const pBonus     = document.getElementById('pBonus');
 
-// Table
 const cmpBody    = document.getElementById('cmpBody');
 
-/* ── Helpers ───────────────────────────────────── */
 function inr(n) {
   if (!n && n !== 0) return '—';
   return '₹' + Math.round(n).toLocaleString('en-IN');
@@ -97,7 +83,6 @@ function countUp(el, target, formatter) {
   }, interval);
 }
 
-/* ── Validation ────────────────────────────────── */
 function setErr(fieldId, errId, msg) {
   document.getElementById(fieldId).classList.add('has-err');
   document.getElementById(errId).textContent = msg;
@@ -154,7 +139,6 @@ function validate() {
   return ok;
 }
 
-/* ── Calculation ───────────────────────────────── */
 function calc() {
   const ctc     = parseFloat(iCTC.value);
   const bonus   = parseFloat(iBonus.value);
@@ -171,16 +155,13 @@ function calc() {
   return { ctc, bonus, fixedPay, pfAmt, taxAmt, deductions, annualNet, monthlyNet };
 }
 
-/* ── Render ────────────────────────────────────── */
 function render(d) {
   emptyState.style.display = 'none';
   resultsBlock.classList.remove('show');
   
-  // Trigger reflow to restart animation
   void resultsBlock.offsetWidth;
   resultsBlock.classList.add('show');
 
-  // Stats
   countUp(svMonthly, d.monthlyNet, inr);
   countUp(svFixed,   d.fixedPay,   inr);
   countUp(svAnnual,  d.annualNet,  inr);
@@ -188,7 +169,6 @@ function render(d) {
 
   subMonthly.textContent = `from ${lpa(d.ctc)} CTC`;
 
-  // Health Bar
   const deductPct = d.fixedPay > 0 ? (d.deductions / d.fixedPay) * 100 : 0;
   healthPct.textContent = deductPct.toFixed(1) + '%';
   
@@ -203,7 +183,6 @@ function render(d) {
   else if (deductPct <= 30) healthNote.textContent = 'Moderate tax bracket.';
   else healthNote.textContent = 'High tax burden detected.';
 
-  // Breakdown Bars
   const total = d.ctc;
   const pcts = {
     inhand: (d.annualNet / total) * 100,
@@ -227,7 +206,6 @@ function render(d) {
   renderTable(d);
 }
 
-/* ── Table ─────────────────────────────────────── */
 const BENCHMARKS = [500000, 800000, 1200000, 1800000, 2500000, 4000000];
 
 function renderTable(d) {
@@ -238,7 +216,6 @@ function renderTable(d) {
   cmpBody.innerHTML = '';
 
   list.forEach(ctc => {
-    // For benchmarks, assume 10% bonus if not user's exact CTC
     const bonus = ctc === d.ctc ? d.bonus : (ctc * 0.1); 
     const fixed = ctc - bonus;
     const net   = fixed * (1 - pfRate - taxRate);
@@ -264,7 +241,6 @@ function renderTable(d) {
   });
 }
 
-/* ── Events ────────────────────────────────────── */
 form.addEventListener('submit', e => {
   e.preventDefault();
   if (validate()) render(calc());
@@ -318,10 +294,6 @@ iTax.addEventListener('input', () => clearErr('fTax', 'eTax'));
     if (e.key === 'Enter') { e.preventDefault(); btnCalc.click(); }
   });
 });
-
-/* ==========================
-   CONSTELLATION BACKGROUND
-========================== */
 
 const canvas =
 document.getElementById(
